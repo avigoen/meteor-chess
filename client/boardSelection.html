@@ -1,0 +1,41 @@
+<template name="boardSelection">
+  {{> connectionStatus}}
+  <div class="container">
+    <h1 class="text-center"><span class="glyphicon glyphicon-king"> </span>
+      <strong>Chess </strong>Select a board to play
+    </h1>
+    <button class="btn btn-primary navbar-btn" id="new" align="center">
+      <span class="glyphicon glyphicon-plus"> </span> Add new board
+    </button>
+
+    <ul class="list-group">
+    {{#each boards}}
+    <li class="list-group-item" id="{{_id}}" style="padding-bottom: 2%;">
+      <span class="glyphicon glyphicon-{{icon}}"
+            style="color: black; width: 36px; height: 36px; font-size: 1.5em; align: center;"> </span>
+      Board #{{number}} - created at {{creation}},
+      {{#unless winner}}
+        {{toMove}} is to move
+        <a href="{{pathFor 'boardDelete'}}" class="btn btn-danger" style="float:center right;">
+          <span class="glyphicon glyphicon-trash"> </span> Delete this board
+        </a>
+      {{else}}
+        <strong>{{winner}} has won the game.</strong>
+        <a href="{{pathFor 'boardDelete'}}" class="btn btn-danger" style="float:inline-end;">
+          <span class="glyphicon glyphicon-trash"> </span> Delete this board
+        </a>
+      {{/unless}}
+    </li>
+    {{/each}}
+    </ul>
+    {{#if empty}}
+    <div class="list-group">
+      <div class="list-group-item">
+        <span class="glyphicon glyphicon-info-sign"> </span>
+        There are no boards yet. Use the button "Add&nbsp;new&nbsp;board" to
+        create a new one.
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</template>
